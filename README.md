@@ -84,3 +84,11 @@ We add module loading support in four steps:
 </body>
 ```
 
+### System.config
+
+System.js demands that we specify a default extension for the filenames that correspond to whatever it is asked to import. Without that default, it would translate an import statement such as import {Hero} from './hero' to a request for the file named hero. Not hero.js. Just plain hero. Our server error with "404 - not found" because it doesn't have a file of that name.
+
+### Asynchronous System.import
+
+System.import returns a promise and we must wait for that promise to resolve. Only then can Jasmine start evaluating the imported tests.
+
