@@ -56,3 +56,31 @@ We add module loading support in four steps:
 2. configure SystemJS to look for JavaScript files by default
 3. import our test files
 4. tell Jasmine to run the imported tests
+
+```html
+<body>
+  <!-- #1. add the system.js library -->
+  <script src="../node_modules/systemjs/dist/system.src.js"></script>
+
+  <script>
+    // #2. Configure systemjs to use the .js extension
+    //     for imports from the app folder
+    System.config({
+      packages: {
+        'app': {defaultExtension: 'js'}
+      }
+    });
+
+    // #3. Import the spec file explicitly
+    System.import('app/hero.spec')
+
+      // #4. wait for all imports to load ...
+      //     then re-execute `window.onload` which
+      //     triggers the Jasmine test-runner start
+      //     or explain what went wrong.
+      .then(window.onload)
+      .catch(console.error.bind(console));
+  </script>
+</body>
+```
+
