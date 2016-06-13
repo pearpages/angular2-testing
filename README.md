@@ -23,7 +23,8 @@ We first have to tell the compiler how to compile our TypeScript files with a **
     "removeComments": false,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true
-  }
+  },
+  "files": ["src/**/*.ts"]
 }
 ```
 
@@ -32,5 +33,7 @@ We first have to tell the compiler how to compile our TypeScript files with a **
 Compile in the terminal window using the npm script command
 
 ```bash
-npm run tsc
+tsc
 ```
+
+Every test file should have at least one describe that identifies the file holding the test(s).
