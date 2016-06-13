@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta http-equiv="content-type" content="text/html;charset=utf-8">
   <title>Ng App Unit Tests</title>
@@ -7,24 +8,41 @@
   <script src="/node_modules/jasmine-core/lib/jasmine-core/jasmine.js"></script>
   <script src="/node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
   <script src="/node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
-  
 </head>
+
 <body>
   <!-- #1. add the system.js library -->
-  <script src="/node_modules/systemjs/dist/system.src.js"></script>
-
+   <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
   <script>
     // #2. Configure systemjs to use the .js extension
     //     for imports from the app folder
     System.config({
-      packages: {
-        'src': {defaultExtension: 'js'}
+    defaultJSExtensions: true,
+    map: {
+       '@angular':                   'node_modules/@angular',
+      rxjs: 'node_modules/rxjs'
+    },
+    packages: {
+      app: {
+        defaultExtension: 'js',
+        format: 'register'
+      },
+      angular2: {
+        defaultExtension: 'js',
       }
-    });
+    }
+  });
 
     // #3. Import the spec file explicitly
-    System.import('src/1st.spec')
-    System.import('src/hero.spec')
+    Promise.all([
+      System.import('src/1st.spec'),
+      System.import('src/hero.spec'),  
+      System.import('src/pipe.spec')  
+    ])
 
       // #4. wait for all imports to load ...
       //     then re-execute `window.onload` which
@@ -34,4 +52,5 @@
       .catch(console.error.bind(console));
   </script>
 </body>
+
 </html>
