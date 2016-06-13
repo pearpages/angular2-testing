@@ -46,3 +46,13 @@ Open the browser’s “Developer Tools” (F12 or Ctrl-Shift-I).
 - Open the 1st.spec.ts test file (Ctrl-P, then start typing the name of the file).
 - Set a breakpoint on the second line of the failing test
 
+## Load tests with SystemJS
+
+Our test environment lacks support for module loading. Apparently we can't simply load our application and test scripts like we do with 3rd party JavaScript libraries.
+
+We add module loading support in four steps:
+
+1. add the SystemJS module management library
+2. configure SystemJS to look for JavaScript files by default
+3. import our test files
+4. tell Jasmine to run the imported tests
